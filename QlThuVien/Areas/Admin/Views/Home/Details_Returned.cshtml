@@ -1,0 +1,44 @@
+﻿
+@model QlThuVien.Models.Book
+@{
+    ViewBag.Title = "Detials";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="~/Areas/Admin/Content/ckeditor/ckeditor.js"></script>
+}
+
+<div class="container">
+    <h4>Thông tin sách   </h4>
+    <div class="card" style="padding: 30px">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div class="header-top">
+                    <h2>@Model.BookTitle</h2>
+
+                </div>
+                <div>
+                    <iframe src="~/UploadFile/@Model.FileUpLoad" style="width : 100% ; " height="600" type='application/pdf'>
+                    </iframe>
+                </div>
+
+                <p style="margin-top:20px;" class="desc">Mô tả: @Model.Description</p>
+                <p style="margin-top:20px;" class="desc">Tác giả: @Model.BookAuthor</p>
+                <p style="margin-top:20px;" class="desc">Bản quyền: @Model.CopyRights</p>
+                <p style="margin-top:20px;" class="desc">Ngày phát hành: @Model.Date</p>
+                <p style="margin-top:20px;" class="desc">Nguồn: @Model.Source</p>
+                <p style="margin-top:20px;" class="desc">Mã số ISBN: @Model.ISBN</p>
+                <p style="margin-top:20px;" class="desc">Nhà xuất bản: @Model.Publisher</p>
+                <p style="margin-top:20px;" class="desc">Ngôn ngữ: @Model.Language</p>
+                <p style="margin-top:20px;" class="desc">Số lượng: @Model.Quantity </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @Html.ActionLink("Về trang chủ", "Returned", null, htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>
+        Thư viện số
+    </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @{ 
+        var kh = Session["TaikhoanKH"];
+    }
+    <meta name="description" content="Thư viện Thủ Dầu Một" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <link href="~/assets/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/font-awesome.css" type="text/css" />
+
+
+
+
+    <script src="~/assets/js/jquery-3.4.1.min.js"></script>
+
+   
+
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap" rel="stylesheet" />
+    <link href="~/assets/fonts/Muli/Muli_All.css" rel="stylesheet" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <link rel="stylesheet" href="~/assets/css/style-old.css" />
+
+</head>
+<body>
+
+
+
+
+
+    @*Preloader*@
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- /End Preloader -->
+    <!-- Start Header Area -->
+    <header class="header navbar-area" style="height:95px;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+
+
+
+                    <div class="nav-inner">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="~/Home/Index" style="padding:0px 0px; margin-right:100px; ">
+                                <img src="~/assets/images/logo/logo.png" alt="Logo" style="height:58px;">
+                            </a>
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+
+                                    <li class='nav-item'><a class='dd-menu' href='@Url.Action("About","Home")'><span>Giới thiệu</span></a></li>
+                                    <li class='nav-item'><a class='dd-menu' href="@Url.Action("Product","Home")" target='_self'><span>Tra cứu Thư viện số</span></a></li>
+
+                                </ul>
+                                <div class="login-button">
+
+                                   @Html.Action("LoginLogout", "User")
+
+
+                                </div>
+                            </div> <!-- navbar collapse -->
+
+
+
+
+
+
+
+
+                        </nav> <!-- navbar -->
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header>
+    <!-- End Header Area -->
+
+
+
+
+
+
+
+
+    @RenderBody()
+
+
+
+
+
+
+
+
+    <!-- Start Footer Area -->
+    <footer class="mini-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="copyright-text">
+                        <p>
+                            © 2023
+                            <a href="#">Library</a>. Thư viện trường Đại Học Thủ Dầu Một
+                            <a href="#">Thiết kế bởi NVD-DVT</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ End Footer Area -->
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    @*<script src="~/assets/js/wow.min.js"></script>*@
+    <script src="~/assets/js/tiny-slider.js"></script>
+    <script src="~/assets/js/glightbox.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script type="text/javascript">
+
+        //====== Clients Logo Slider
+        tns({
+            container: '.client-logo-carousel',
+            slideBy: 'page',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 15,
+            nav: false,
+            controls: false,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 1,
+                },
+                768: {
+                    items: 1,
+                },
+                992: {
+                    items: 1,
+                },
+                1170: {
+                    items: 1,
+                }
+            }
+        });
+
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--
+    <script src="assets/js/bootstrap.min.js"></script>
+    -->
+    @*<script src="~/assets/js/wow.min.js"></script>*@
+    <script src="~/assets/js/tiny-slider.js"></script>
+    @*<script src="~/assets/js/glightbox.min.js"></script>*@
+    <script src="~/assets/js/main.js"></script>
+    <script type="text/javascript">
+        var forEach = function (array, callback, scope) {
+            for (var i = 0; i < array.length; i++) {
+                callback.call(scope, i, array[i]); // passes back stuff we need
+            }
+        }
+
+        // select all slider parent div.tartist-tiny-slider
+        var sliders = document.querySelectorAll('.tartist-tiny-slider');
+
+        // chunk function to make groups for every slider's childrens
+        var chunk = function (array, size) {
+            let arr = [];
+            for (let i = 0; i < array.length; i += size) {
+                let newSlicedArray = Array.prototype.slice.call(array, i, i + size);
+                arr.push(newSlicedArray);
+            }
+            return arr;
+        }
+
+        // applying foreach function to the sliders
+        forEach(sliders, function (index, value) {
+
+            //selecting childrens
+            let childrens = value.querySelectorAll(".tartist-tiny-slider__item");
+
+            //getting chunksize from the parent
+            let chunkSize = value.dataset.chunksize;
+
+            //making final arrays for the children with chunk size
+            let final = chunk(childrens, parseInt(chunkSize));
+
+            //wrapping the chunks with div.wrap
+            let newHTML = final.map(towrap => towrap.reduce((acc, el) => (acc.appendChild(el), acc), document.createElement('div'))).forEach(el => {
+                el.className = "wrap";
+                value.appendChild(el)
+            })
+
+            //initialize tiny slider
+            let slider = tns({
+                container: value,
+                items: 1,
+                slideBy: "page",
+                autoplay: true,
+                autoplayButtonOutput: false,
+                loop: true,
+                mouseDrag: true,
+                gutter: 20,
+                controls: false,
+                navPosition: "bottom",
+                nav: true,
+            });
+
+        });
+        //========= Category Slider
+        tns({
+            container: '.category-slider',
+            items: 3,
+            row: 2,
+            slideBy: 1,
+            autoplay: false,
+            mouseDrag: true,
+            gutter: 0,
+            nav: false,
+            controls: true,
+            controlsText: ['<i class="fa-solid fa-arrow-left"></i>', '<i class="fa-solid fa-arrow-right"></i>'],
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                540: {
+                    items: 2,
+                },
+
+                1170: {
+                    items: 4,
+                }
+            }
+        });
+    </script>
+    <style type="text/css">
+        input, select, textarea {
+            max-width: none;
+        }
+
+        .items-grid .single-grid .image img {
+            height: 250px;
+        }
+
+        .content .single-grid wow fadeInUp {
+            height: 294px;
+        }
+    </style>
+    @*<script>
+            $(document).ready(function () {
+                $('#loginModal').modal('show');
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                })
+            });
+        </script>*@
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

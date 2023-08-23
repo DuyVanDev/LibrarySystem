@@ -1,0 +1,26 @@
+﻿body {
+    font-family: "Jost", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #888;
+    overflow-x: hidden;
+    font-size: 15px;
+}
+
+.navbar-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    -webkit-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+    padding: 0;
+}
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}

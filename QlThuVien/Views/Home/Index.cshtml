@@ -1,0 +1,302 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .content p {
+        white-space: break-spaces;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 100px;
+    }
+</style>
+
+<!--Start Content-->
+<section class="content" id="main-content" style="padding-top: 8px;">
+</section>
+
+<!--End Content-->
+<!--form tim kiem nhanh  -->
+<section class="hero-area overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-md-12 col-12">
+                <div class="hero-text text-center">
+                    <!-- Start Hero Text -->
+                    <div class="section-heading">
+                        <h2 class="wow fadeInUp" data-wow-delay=".3s">TRA CỨU TÀI LIỆU SỐ </h2>
+                    </div>
+                    <!-- End Search Form -->
+
+                </div>
+            </div>
+        </div>
+        <!-- end services -->
+
+
+
+
+        <input type="hidden" class="txtMsg" value="Chưa có điều kiện tìm kiếm!" />
+
+        <div class="clear"></div>
+    </div>
+</section>
+
+
+<section class="notify">
+    <div class="container">
+        <h2 class="notyfi-title">Thông báo</h2>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-12 col-sm-12 ">
+
+                <div class="notify-content">
+                    <ul>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#" title="Thông báo về việc mượn trả sách">Thông báo về việc mượn trả sách</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#" title="Thông báo về việc nghỉ tết Nguyên đán">Thông báo về việc nghỉ tết Nguyên đán</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Thông báo (Lịch nghỉ Tết Dương lịch 2023)</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Thông báo  (Về việc Thu hồi sách quá hạn)</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Các quy trình áp dụng tại Trung tâm Học liệu</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-12 ctn" style="border-left : 2px solid #000">
+
+                <div class="notify-content">
+                    <ul>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Trung tâm Học liệu Tập huấn đầu khoá dành cho Học viên cao học Khoá 22 (2022 – 2024)</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Thông báo (Về việc Thu hồi sách quá hạn) </a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#" title="Thư ngỏ (Vv Quyên góp ủng hộ dự án xây dựng Thư viện cho các em học sinh tiểu học)">Thư Ngỏ (Vv Quyên góp ủng hộ dự án xây dựng Thư viện cho các em học sinh tiểu học)</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#" title="ĐƯA VÀO HOẠT ĐỘNG MÁY BÁN SÁCH TỰ ĐỘNG">Đưa vào hoạt động máy bán sách tự động</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-pen"></i><a href="#">Thư viện số trường Đại học Thủ Dầu Một</a>
+                            </div>
+                            <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="categories">
+
+    <div class="container">
+        <h2>Tài liệu sách</h2>
+        <div class="tartist-tiny-slider-wrap">
+            <div class="tartist-tiny-slider" data-chunksize="6">
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/llct.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Triết học - lý luận</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=3">Xem</a>
+                    </div>
+                </div>
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/vhnt.png" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Văn Học-Nghệ Thuật</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=4">Xem</a>
+                    </div>
+                </div>
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/ktcn.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Công Nghệ-Thông Tin</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=1">Xem</a>
+                    </div>
+                </div>
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/kientruc.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Kiến Trúc</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=5">Xem</a>
+                    </div>
+                </div>
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/qtkd.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Quản trị - Kinh doanh</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=2">Xem</a>
+                    </div>
+                </div>
+                <div class="tartist-tiny-slider__item">
+                    <div class="img">
+                        <img src="~/assets/images/lichsu.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="contentBx">
+                        <h3>Lịch sử</h3>
+                        <a href="/Products/SachTheoDanhMuc?masach=6">Xem</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews">
+    <div class="container">
+
+        <h2 class="heading">Review</h2>
+
+        <div class="box-container">
+
+            <div class="box">
+                <div class="image">
+                    <img src="~/assets/images/rv-sachcn.jpg" width="200" height="200" alt="">
+                </div>
+                <div class="content">
+                    <a title="Review sách Nền Tảng Công Nghệ – Hướng Đi Mới Cho Doanh Nghiệp Trong Thời Đại 4.0" href="@Url.Action("ReView","Home")" style="overflow : hidden; white-space : nowrap; text-overflow : ellipsis; font-size : 20px; color : #000; width : 400px">Review sách Nền Tảng Công Nghệ – Hướng Đi Mới Cho Doanh Nghiệp Trong Thời Đại 4.0</a>
+                    <p>Thiết kế lại tổ chức doanh nghiệp từ dưới lên để tạo ra lợi thế cạnh tranh mới trong nền kinh tế kỹ thuật số là một thách thức cho các nhà lãnh đạo. Trong thời đại 4.0, các mô hình kinh doanh lớn đã thay đổi, nền tảng công nghệ là một hướng đi mới dành cho các doanh nghiệp. Doanh nghiệp cũ cần thích ứng, doanh nghiệp mới cần nắm bắt tư duy, làm thế nào để không chỉ tồn tại mà còn phát triển? Mời bạn đọc cùng Eccthai đi tìm giải pháp qua cuốn sách Nền Tảng Công Nghệ qua bài viết sau.</p>
+                    <a href="@Url.Action("ReView","Home")" class="btn">Xem chi tiết</a>
+                    <div class="icons">
+                        <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        <span> <i class="fas fa-user"></i> by admin </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="/assets/images/rv-sachqt.jpg" width="200" height="200" alt="">
+                </div>
+                <div class="content">
+                    <h3>Một đời quản trị - GS. Phan Văn Trường</h3>
+                    <p>
+                        Nhắc đến tác giả Phan Văn Trường, được biết ông là vị giáo sư tài giỏi, là người đứng đầu rất nhiều các tập đoàn lớn trên thế giới cũng như đã quản lý cả hàng trăm, hàng nghìn nhân viên ở nhiều quốc gia khác nhau.
+                        Và khi ông cho ra đời cuốn sách Một đời quản trị này, nó không chỉ đơn giản là viết sách, mà thực chất cuốn sách này như là những dòng tâm sự được ông chia sẻ và đúc kết lại như một quyển nhật ký của một vị doanh nhân thành đạt người Việt.
+                    </p>
+                    <a href="@Url.Action("ReView","Home")" class="btn">Xem chi tiết</a>
+                    <div class="icons">
+                        <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        <span> <i class="fas fa-user"></i> by admin </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="/assets/images/rv-sachkt.jpg" width="200" height="200" alt="">
+                </div>
+                <div class="content">
+                    <h3>Dữ Liệu Của Kiến Trúc Sư </h3>
+                    <p>Cuốn sách được viết bởi nhiều kiến trúc sư giàu kinh nghiệm trên thế giới. Đây là cuốn sách tổng hợp kinh nghiệm của những kiến trúc sư tài ba, một kho tàng kiến thức khổng lồ của tất cả các mảng trong lĩnh vực kỹ thuật - xây dựng. Các tác giả đã chia sẻ những tư liệu cho từng bước trong quá trình thiết kế ban đầu, đóng vai trò như bản kế hoạch của một dự án, một công trình kiến trúc. Cuốn sách còn dựa trên những quan điểm tương quan về kích thước giữa con người và các công trình kỹ thuật như nhà ở, trung tâm thương mại, bệnh viện,... Đối với một sinh viên cần sự khám phá, tìm tòi hay một người đam mê nghệ thuật kiến trúc nhưng chưa biết bắt đầu từ đâu thì cuốn sách là sự lựa chọn thích hợp để có hướng đi tốt từ lúc bắt đầu. </p>
+                    <a href="@Url.Action("ReView","Home")" class="btn">Xem chi tiết</a>
+                    <div class="icons">
+                        <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        <span> <i class="fas fa-user"></i> by admin </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img src="/assets/images/qtkd.jpg" width="200" height="200" alt="">
+                </div>
+                <div class="content">
+                    <h3>Đắc nhân tâm có thực sự hay</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, adipisci!</p>
+                    <a href="@Url.Action("ReView","Home")" class="btn">Xem chi tiết</a>
+                    <div class="icons">
+                        <span> <i class="fas fa-calendar"></i> 21st may, 2022 </span>
+                        <span> <i class="fas fa-user"></i> by admin </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div id="load-more"> Xem thêm </div>
+
+    </div>
+
+
+
+
+</section>
+<script>
+
+
+
+    let loadMoreBtn = document.querySelector('#load-more');
+    let currentItem = 3;
+
+    loadMoreBtn.onclick = () => {
+        let boxes = [...document.querySelectorAll('.container .box-container .box')];
+        for (var i = currentItem; i < currentItem + 3; i++) {
+            boxes[i].style.display = 'inline-block';
+        }
+        currentItem += 3;
+
+        if (currentItem >= boxes.length) {
+            loadMoreBtn.style.display = 'none';
+        }
+    }
+
+
+
+</script>

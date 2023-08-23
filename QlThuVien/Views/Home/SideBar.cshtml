@@ -1,0 +1,9 @@
+﻿@foreach (var item in Model)
+{
+    <ul class="nav-left" style="margin-top: 5px; margin-bottom: 5px;">
+        <li><a href="@Url.Action("SachTheoDanhMuc","Products",new { masach = item.CategoryId})">@item.CategoryName</a></li>
+    </ul>
+
+
+
+}

@@ -1,0 +1,41 @@
+﻿
+<div class="row >
+    <div class="col-12">
+        <form action="/Products/TimKiem">
+
+            <div class="search-form wow fadeInUp" data-wow-delay=".7s">
+                <div class="row d-flex align-items-center search-form-inner" >
+                    <div class="col-lg-7 col-md-5  p-0">
+                        <div class="search-input">
+
+                            <label for="keyword"><i class="fa-solid fa-magnifying-glass"></i></label>
+
+                            @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Nhập thông tin tìm kiếm (Nhan đề, tác giả, Từ khóa...)" })
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 p-0">
+                            <div class="search-input">
+                                <label for="category"><i class="fa-solid fa-list"></i></label>
+
+                                <select name="keyword" id="" class="select-category">
+                                   
+                                    <option value="BookTitle">Nhan đề</option>
+                                    <option value="BookAuthor">Tác giả</option>
+                                    <option value="Date">Năm xuất bản</option>
+                                    <option value="ISBN">Mã sách</option>
+                                    <option value="ViewTotal">Xem nhiều</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    <div class="col-lg-2 col-md-4 p-0">
+                        <div class="search-btn button">
+                            <input type="submit" class="btn btn-primary" value="TÌM KIẾM" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

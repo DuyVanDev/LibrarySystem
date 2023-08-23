@@ -1,0 +1,202 @@
+﻿
+@model QlThuVien.Models.Book
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="~/Areas/Admin/Content/ckeditor/ckeditor.js"></script>
+}
+
+<div class="container">
+    <h4>Cập nhật lại sách    </h4>
+    @*Thêm thuộc tính cho form để upload ảnh*@
+    @using (Html.BeginForm("Edit", "Products", FormMethod.Post, new
+    {
+        @enctype = "multipart/form-data"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                @*Chỉ hiển thị mã sách không cho sửa*@
+                <input type="hidden" size="70" name="bookid" value="@Model.BookId" readonly class="form-control" />
+            </div>
+        </div>
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Tên sách:</label>
+                <div class="col-md-10">
+                    <input type="text" size="70" name="sTenSach" value="@Model.BookTitle" class="form-control"
+                           required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Danh mục:</label>
+                <div class="col-md-10">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    @Html.DropDownList("DanhMuc", null, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Mô tả:</label>
+                <div class="col-md-10">
+
+
+                    <textarea name="sMoTa" id="Description">@Model.Description</textarea>
+                    <script>
+                        CKEDITOR.replace("Description");
+                    </script>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Hình ảnh:</label>
+                <div class="col-md-10">
+                    <input type="file" name="UploadImage" value="@Model.BookImage" class="form-control" />
+                    @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
+                    @ViewBag.ThongBao
+                </div>
+                <div class="im">
+                    <img src="~/UploadImage/@Model.BookImage" width="300"> (Ảnh hiện tại)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">File:</label>
+                <div class="col-md-10">
+                    <input type="file" name="UploadFile" class="form-control" value="@Model.FileUpLoad" />
+                    @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
+                    @ViewBag.ThongBao
+                </div>
+                <div class="im">
+                    <input type="text" size="70" value="@Model.FileUpLoad" class="form-control"
+                           required /> (File hiện tại)
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Số lượng:</label>
+            <div class="col-md-10">
+                <input type="number" min="1" required name="mSoluong"
+                       value="@Model.Quantity" class="form-control" />
+            </div>
+        </div>
+
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2" style="min-width : 200px">Ngôn ngữ:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    @Html.DropDownList("Language", new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Tiếng Việt", Value = "Tiếng Việt" },
+        new SelectListItem{ Text="Tiếng Anh", Value = "Tiếng Anh" },
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Tác giả:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="Tacgia" value="@Model.BookAuthor" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2">ISBN:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="isbn" value="@Model.ISBN" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Copyright:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="copyright" value="@Model.CopyRights" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Source:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="source" value="@Model.Source" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Ngày phát hành:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="date" size="70" name="date" value="@Model.Date" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Nhà xuất bản:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="nhaxuatban" value="@Model.Publisher" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Vị trí:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="vitri" value="@Model.BookPosition" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Lưu" class="btn btn-success" />
+                @Html.ActionLink("Về trang chủ", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+            </div>
+
+        </div>
+
+    }
+
+</div>
+

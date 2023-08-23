@@ -1,0 +1,187 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model QlThuVien.Models.User
+
+
+<style>
+    .content {
+     /*   width: 100vw;
+        background: #dde1e7;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 100px 30px 40px 30px;
+        box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);*/
+          width: 100vw;
+        background: #dde1e7;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 40px 30px;
+        box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
+
+    }
+
+        .content .text {
+            font-size: 33px;
+            font-weight: 600;
+            margin-bottom: 35px;
+            color: #000;
+        }
+
+        .content .field {
+            height: 50px;
+            width: 100%;
+            display: flex;
+            position: relative;
+        }
+
+    .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #595959;
+        border: 1px solid black;
+        background: #dde1e7;
+        border-radius: 25px;
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    }
+
+        .field input {
+            height: 100%;
+            width: 100%;
+            padding-left: 45px;
+            font-size: 18px;
+            background: #dde1e7;
+            border: none;
+            border-radius: 25px;
+        }
+
+            .field input:focus ~ label {
+                box-shadow: inset 2px 2px 5px #babecc, inset -1px -1px 2px #ffffff73;
+            }
+
+        .field:nth-child(2) {
+            margin-top: 20px;
+        }
+
+
+
+
+        .field input:focus ~ label {
+            opacity: 0;
+        }
+
+    .forgot-pass {
+        text-align: left;
+        margin: 10px 0 10px 5px;
+    }
+
+        .forgot-pass a {
+            font-size: 16px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .forgot-pass:hover a {
+            text-decoration: underline;
+        }
+
+    .btn-sign-up {
+        margin: 15px 0;
+        width: 100%;
+        height: 50px;
+        color: #000;
+        font-size: 18px;
+        font-weight: 600;
+        background: #dde1e7;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 25px;
+        box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
+    }
+
+    button:focus {
+        color: #3498db;
+        box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
+    }
+
+    .signup {
+        font-size: 16px;
+        color: #595959;
+        margin: 10px 0;
+    }
+
+        .signup a {
+            color: #000;
+            text-decoration: none;
+        }
+
+            .signup a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+
+
+@Html.ValidationSummary(true)
+@using (Html.BeginForm("DangKy", "User"))
+{
+    <div class="content form-register">
+
+        <div class="text">Đăng ký</div>
+        <form action="#">
+            <div class="field col-md-3 col-12 mb-3">
+                <span class="fas fa-user"></span>
+                <input type="text" name="TenDN" placeholder="Nhập tên" required>
+            </div>
+
+            <div class="field col-md-3 col-12 mb-3">
+                <span class="fas fa-id-card"></span>
+                <input type="text" name="MSSV" placeholder="Nhập mã số sinh viên" required>
+            </div>
+
+            <div class="field col-md-3 col-12 mb-3">
+                <span class="fas fa-envelope"></span>
+                <input type="email" name="Email" placeholder="Nhập Email" required>
+
+            </div>
+
+            <div class="field col-md-3 mb-3 col-12">
+                <span class="fas fa-lock"></span>
+                <input type="password" name="Matkhau" placeholder="Nhập mật khẩu" required>
+            </div>
+            <div class="field col-md-3 mb-3 col-12">
+                <span class="fas fa-lock"></span>
+                <input type="password" name="MatkhauNL" placeholder="Nhập lại mật khẩu" required>
+            </div>
+            <div class="field col-md-3 col-12">
+                <span class="fas fa-phone"></span>
+                <input type="text" name="DT" placeholder="Nhập số điện thoại" required>
+
+            </div>
+            <div class="col-md-3 mb-3" style="font-size: 15px; color: #eb3408; padding: 0px;">
+                @ViewData["err8"]
+                @ViewData["err9"]
+                @ViewData["err10"]
+            </div>
+            <button class="col-md-2 col-12 btn-sign-up">Đăng ký</button>
+            <div class="signup">
+                Đã có tài khoản?
+                <a href="@Url.Action("DangNhap","User")">Đăng nhập ngay</a>
+            </div>
+        </form>
+    </div>
+}
+
+
+
+

@@ -1,0 +1,44 @@
+﻿﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="background: url(https://tailieu.hiepsiit.com/public/images/bg-pattern.png),#ededed; width : 100%;padding : 100px 20px 0 20px;">
+    
+        <div class="container">
+            <div class="card" style="padding: 30px">
+                <div class="row">
+                    <div class="col-md-9 col-xs-9">
+                        <div class="header" style="display : flex ;align-items : center; justify-content : space-between">
+                            <h2>Sach hay</h2>
+
+                        </div>
+                        <iframe src="~/UploadFile/a.pdf" style="width : 100% ; " height="600" type='application/pdf'>
+                        </iframe>
+
+                        <p>Mo ta</p>
+                    </div>
+
+                    <div class="col-md-3 col-xs-3">
+                        <button class="btn btn-success btn-borrow"><a style="color : white;padding : 4px 8px; text-decoration: none" href="@Url.Action("Borrow", "Home",new { bookId = 1 })">Mượn</a></button>
+
+                        <div class="blockSidebar" style="position : sticky; top : 100px">
+                            <h2 class="titleBlock event">
+                                Nhóm tài liệu
+                            </h2>
+                            <div class="bodyBlock">
+                                <div>
+                                    <ul class="nav-left" style="margin-top: 5px; margin-bottom: 5px;">
+                                        <li><a href="">Đang yêu cầu</a></li>
+                                        <li><a href="">Sách đang mượn</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            
+</div>

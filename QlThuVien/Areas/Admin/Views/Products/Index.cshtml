@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .img {
+        border-radius: 10px;
+        object-fit: cover;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    }
+
+    td {
+        vertical-align: baseline;
+        align-items: center;
+    }
+
+    th {
+        font-weight: bolder;
+    }
+
+    p {
+        width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+
+
+<p>
+    @Html.ActionLink("Thêm sách mới", "Create", null, new { @class = "btn btn-succses" })
+</p>
+
+<table class="table">
+    <tr style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding: 10px; border-radius: 5px ">
+        <th align="center">
+            Tên sách
+        </th>
+        <th style="text-align : center">
+            Tác giả
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th style="text-align : center">
+            Tên danh mục
+        </th>
+        <th style="text-align : center">
+            Hình ảnh
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p style=" white-space: nowrap; width: 200px; overflow: hidden; text-overflow: ellipsis;" > @item.BookTitle</p>
+
+            </td>
+            <td align="center">
+                <p style=" white-space: nowrap; width: 200px; overflow: hidden; text-overflow: ellipsis;">@item.BookAuthor</p>
+
+            </td>
+            <td align="center">
+                @item.Quantity
+            </td>
+            <td align="center">
+                <p>@item.Category.CategoryName</p>
+            </td>
+            <td>
+
+                <img src="~/UploadImage/@item.BookImage" width="100" class="img" />
+            </td>
+
+            <td>
+                <a href="/Admin/Products/Edit/@item.BookId"><i class="fa-solid fa-pen-to-square b"></i></a>
+                <a href="/Admin/Products/Details/@item.BookId"><i class="fa-solid fa-circle-info g"></i></a>
+                <a href="#" data-id="@item.BookId" class="Delete"><i class="fa-solid fa-trash r"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@*<div class="list">
+        <div class="MenuTrang">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { page = page }))
+        </div>
+    </div>*@
+<style>
+    .MenuTrang {
+        margin-top: 500px;
+        display: inline;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"></script>*@
+
+<script>
+    const btnDelete = document.querySelectorAll('.Delete');
+    btnDelete.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            var id = btn.dataset.id;
+            event.preventDefault();
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: "Nếu bạn xóa bạn không thể khôi phục lại!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', cancelButtonText: 'Hủy',
+                confirmButtonText: 'Đồng ý'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Xóa thành công'
+                    )
+                    window.location.href = "/Admin/Products/Delete/" + id;
+                }
+            })
+        });
+    });
+</script>
+
+@section Product{
+
+    <script src="~/Areas/Admin/Script/Products.js"></script>
+}

@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLTVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookTitle" Type="nvarchar(max)" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="BookAuthor" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookPosition" Type="varchar" MaxLength="20" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISBN" Type="varchar" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="varchar" MaxLength="50" />
+          <Property Name="CopyRights" Type="nvarchar" MaxLength="50" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="FileUpLoad" Type="nvarchar" MaxLength="255" />
+          <Property Name="BookImage" Type="nvarchar" MaxLength="255" />
+          <Property Name="ViewTotal" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TboAdmin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="30" />
+          <Property Name="AdminEmail" Type="nvarchar" MaxLength="30" />
+          <Property Name="AdminPassword" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TranId" />
+          </Key>
+          <Property Name="TranId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" />
+          <Property Name="TranStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="TranDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="TranDate_Accepted" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranDate_Returned" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranDate_AccReturned" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranDate_Get" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranDate_GiveBack" Type="nvarchar" MaxLength="50" />
+          <Property Name="TranDate_DeleteRequest" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="50" />
+          <Property Name="UserPassword" Type="varchar" MaxLength="50" />
+          <Property Name="UserPhone" Type="varchar" MaxLength="10" />
+          <Property Name="UserResetPassword" Type="varchar" MaxLength="50" />
+          <Property Name="UserCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetAllBorrow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getAllReturn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="QLTVModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TboAdmin" EntityType="Self.TboAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Book" Association="Self.FK_Transactions_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Users" Association="Self.FK_Transactions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLTVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BookAuthor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookPosition" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CopyRights" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="FileUpLoad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BookImage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ViewTotal" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Book_Category" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Book" FromRole="Book" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_Book_Category" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="TboAdmin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="AdminEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="AdminPassword" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TranId" />
+          </Key>
+          <Property Name="TranId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" />
+          <Property Name="TranStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="TranDate_Accepted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate_Returned" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate_AccReturned" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate_Get" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate_GiveBack" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TranDate_DeleteRequest" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_Transactions_Book" FromRole="Transactions" ToRole="Book" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Transactions_Users" FromRole="Transactions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserResetPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Users" FromRole="Users" ToRole="Transactions" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLTVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="TboAdmins" EntityType="Self.TboAdmin" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Book_Category" Association="Self.FK_Book_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Book" Association="Self.FK_Transactions_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Users" Association="Self.FK_Transactions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllBorrow" ReturnType="Collection(QLTVModel.GetAllBorrow_Result)" />
+          <FunctionImport Name="GetAllRequest" ReturnType="Collection(QLTVModel.GetAllRequest_Result)" />
+          <FunctionImport Name="getAllReturn" ReturnType="Collection(QLTVModel.getAllReturn_Result)" />
+        </EntityContainer>
+        <ComplexType Name="GetAllBorrow_Result">
+          <Property Type="String" Name="TranStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TranDate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate_Accepted" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate_Returned" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate_AccReturned" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate_DeleteRequest" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+          <Property Type="Int32" Name="TranId" Nullable="false" />
+          <Property Type="String" Name="BookTitle" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserPhone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllRequest_Result">
+          <Property Type="Int32" Name="TranId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BookTitle" Nullable="true" />
+          <Property Type="String" Name="TranStatus" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TranDate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getAllReturn_Result">
+          <Property Type="String" Name="TranStatus" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+          <Property Type="Int32" Name="TranId" Nullable="false" />
+          <Property Type="String" Name="BookTitle" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserEmail" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TranDate_Returned" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLTVModelStoreContainer" CdmEntityContainer="QLTVEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="QLTVModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BookAuthor" ColumnName="BookAuthor" />
+                <ScalarProperty Name="BookStatus" ColumnName="BookStatus" />
+                <ScalarProperty Name="BookPosition" ColumnName="BookPosition" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CopyRights" ColumnName="CopyRights" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="FileUpLoad" ColumnName="FileUpLoad" />
+                <ScalarProperty Name="BookImage" ColumnName="BookImage" />
+                <ScalarProperty Name="ViewTotal" ColumnName="ViewTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="QLTVModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TboAdmins">
+            <EntityTypeMapping TypeName="QLTVModel.TboAdmin">
+              <MappingFragment StoreEntitySet="TboAdmin">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="QLTVModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TranId" ColumnName="TranId" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="TranStatus" ColumnName="TranStatus" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TranDate_Accepted" ColumnName="TranDate_Accepted" />
+                <ScalarProperty Name="TranDate_Returned" ColumnName="TranDate_Returned" />
+                <ScalarProperty Name="TranDate_AccReturned" ColumnName="TranDate_AccReturned" />
+                <ScalarProperty Name="TranDate_Get" ColumnName="TranDate_Get" />
+                <ScalarProperty Name="TranDate_GiveBack" ColumnName="TranDate_GiveBack" />
+                <ScalarProperty Name="TranDate_DeleteRequest" ColumnName="TranDate_DeleteRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QLTVModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserResetPassword" ColumnName="UserResetPassword" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAllBorrow" FunctionName="QLTVModel.Store.GetAllBorrow">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLTVModel.GetAllBorrow_Result">
+                <ScalarProperty Name="TranStatus" ColumnName="TranStatus" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="TranDate_Accepted" ColumnName="TranDate_Accepted" />
+                <ScalarProperty Name="TranDate_Returned" ColumnName="TranDate_Returned" />
+                <ScalarProperty Name="TranDate_AccReturned" ColumnName="TranDate_AccReturned" />
+                <ScalarProperty Name="TranDate_DeleteRequest" ColumnName="TranDate_DeleteRequest" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="TranId" ColumnName="TranId" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllRequest" FunctionName="QLTVModel.Store.GetAllRequest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLTVModel.GetAllRequest_Result">
+                <ScalarProperty Name="TranId" ColumnName="TranId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="TranStatus" ColumnName="TranStatus" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAllReturn" FunctionName="QLTVModel.Store.getAllReturn">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLTVModel.getAllReturn_Result">
+                <ScalarProperty Name="TranStatus" ColumnName="TranStatus" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="TranId" ColumnName="TranId" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="TranDate" ColumnName="TranDate" />
+                <ScalarProperty Name="TranDate_Returned" ColumnName="TranDate_Returned" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

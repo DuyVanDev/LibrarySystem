@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Requests";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .img {
+        border-radius: 10px;
+        height: 110px;
+        object-fit: cover;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    }
+
+    td {
+        vertical-align: baseline;
+        align-items: center;
+    }
+
+    th {
+        font-weight: bolder;
+    }
+
+    p {
+        width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<table class="table">
+    <tr style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding: 10px; border-radius: 5px ">
+        @*<th align="center" width="400px">
+            Tên sách
+        </th>*@
+        <th style="text-align : center" width="100px">
+            Tên sinh viên
+        </th>
+        <th style="text-align : center">
+            Mã số sinh viên
+        </th>
+
+        <th style="text-align : center">
+            Email
+        </th>
+        <th style="text-align : center">
+            Thông tin sách mượn
+        </th>
+        <th style="text-align : center">
+            Ngày mượn
+        </th>
+
+
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+          @item.BookTitle
+        </td>*@
+                <td align="center">
+                    @item.UserName
+                </td>
+                <td align="center">
+                    @item.UserCode
+                </td>
+
+                <td align="center">
+                    <a href="@Url.Action("SendMail_Request", "Home", new {id=item.UserId, tranid = item.TranId})">@item.UserEmail<i class="fa-solid fa-mail-reply"></i></a>
+
+                </td>
+                <td align="center">
+                    <a href="/Admin/Home/Details_Requests/@item.BookId"><i class="fa-solid fa-circle-info g"></i></a>
+                </td>
+                <td align="center">
+                    @item.TranDate
+                </td>
+                <td>
+
+                    <a onclick='acceptRequest()' class='btn btn-sm btn-primary text-light'
+                       data-toggle='tooltip' title='Accept book request'
+                       href='@Url.Action("AcceptRequest", "Home", new { tranId = item.TranId})'><i class="fas fa-check-circle"></i> Đồng ý</a>
+
+                    <a onclick='rejectRequest()' class='btn btn-sm btn-danger text-light'
+                       data-toggle='tooltip' title='Accept book request'
+                       href='@Url.Action("RejectRequest", "Home",new { tranId = item.TranId})'><i class='fas fa-times-circle'></i> Từ chối</a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <div>khong</div>
+    }
+
+    @*@foreach (var item in Model)
+        {
+            if (Model >0)
+            {
+                <tr>
+                    <td>
+                        @item.BookTitle
+                    </td>
+                    <td align="center">
+                        <p>@item.UserName</p>
+                    </td>
+
+                    <td align="center">
+                        <p>@item.TranDate</p>
+                    </td>
+                    <td>
+
+                        <a onclick='acceptRequest()' class='btn btn-sm btn-primary text-light'
+                           data-toggle='tooltip' title='Accept book request'
+                           href='@Url.Action("AcceptRequest", "Home", new { tranId = item.TranId})'><i class="fas fa-check-circle"></i>Đồng ý</a>
+
+                        <a onclick='rejectRequest()' class='btn btn-sm btn-danger text-light'
+                           data-toggle='tooltip' title='Accept book request'
+                           href='@Url.Action("RejectRequest", "Home",new { tranId = item.TranId})'><i class='fas fa-times-circle'>Từ chối</i></a>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <div>Khong co yeu cau</div>
+
+            }
+        }*@
+</table>
+

@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .img {
+        border-radius: 10px;
+        height: 110px;
+        object-fit: cover;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    }
+
+    td {
+        vertical-align: baseline;
+        align-items: center;
+    }
+
+    th {
+        font-weight: bolder;
+    }
+
+    p {
+        width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<table class="table">
+    <tr style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding: 10px; border-radius: 5px ">
+        @*<th align="center" width="500px">
+                Tên sách
+            </th>
+            <th style="text-align : center" width="100px">
+                Người mượn
+            </th>
+            <th style="text-align : center">
+                Ngày mượn
+            </th>
+            <th style="text-align : center">
+                Tên danh mục
+            </th>*@
+        <th style="text-align : center" width="100px">
+            Tên sinh viên
+        </th>
+        <th style="text-align : center">
+            Mã số sinh viên
+        </th>
+
+        <th style="text-align : center">
+            Email
+        </th>
+        <th style="text-align : center">
+            Danh mục sách trả
+        </th>
+        <th style="text-align : center">
+            Ngày mượn
+        </th>
+        <th style="text-align : center">
+            Ngày trả
+        </th>
+
+        <th></th>
+    </tr>
+
+    @if (Model == null)
+    {
+        <tr>
+            <th>khong</th>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            if (item.TranStatus == "Returned")
+            {
+
+
+                <tr>
+                    @*<td>
+                            @item.BookTitle
+                            <a href="/Admin/Home/Details_Returned/@item.BookId"><i class="fa-solid fa-circle-info g"></i></a>
+                        </td>*@
+                    <td align="center">
+                      @item.UserName
+                    </td>
+                    <td align="center">
+                        @item.UserCode
+                    </td>
+                    <td align="center">
+                        <a href="@Url.Action("SendMail_Return", "Home", new {id=item.UserId, tranid = item.TranId})">@item.UserEmail<i class="fa-solid fa-mail-reply"></i></a>
+                    </td>
+                    <td align="center">
+                        @item.CategoryName
+                    </td>
+                    <td align="center">
+                        @item.TranDate
+                    </td>
+                    <td align="center">
+                        @item.TranDate_Returned
+                    </td>
+                    <td>
+
+                        <a class='btn btn-primary'
+                           data-toggle='tooltip' title='Accept book request'
+                           href='@Url.Action("AcceptReturn", "Home", new { tranId = item.TranId })'><i class="fas fa-check-circle"></i> Đồng ý</a>
+
+                    </td>
+                </tr>
+            }
+        }
+    }
+    @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.BookTitle
+                </td>
+                <td align="center">
+                    <p>@item.UserName</p>
+                </td>
+
+                <td align="center">
+                    <p>@item.TranDate</p>
+                </td>
+                <td align="center">
+                    <p>@item.TranId</p>
+                </td>
+                <td>
+
+                    <a class='btn btn-sm btn-primary text-light'
+                       data-toggle='tooltip' title='Accept book request'
+                       href='@Url.Action("AcceptReturn", "Home", new { tranId = item.TranId})'><i class="fas fa-check-circle"></i>Đồng ý</a>
+
+                </td>
+            </tr>
+        }*@
+
+
+</table>
+

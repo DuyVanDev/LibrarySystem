@@ -1,0 +1,119 @@
+﻿
+
+
+@model QlThuVien.Models.User
+@{
+    ViewBag.Title = "Thaydoithongtin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .forgot-pass {
+        text-align: left;
+        margin: 10px 0 10px 5px;
+    }
+
+        .forgot-pass a {
+            font-size: 16px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .forgot-pass:hover a {
+            text-decoration: underline;
+        }
+    .file {
+        flex-wrap: wrap;
+        display: flex;
+        margin: 10px;
+        justify-content: space-around;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        align-items: center;
+    }
+
+    .form-group {
+        align-items: center;
+    }
+
+    h4 {
+        padding: 10px;
+    }
+
+    .col-md-2 {
+        -ms-flex: 0 0 16.666667%;
+        flex: 0 0 16.666667%;
+        max-width: unset;
+    }
+</style>
+
+<div class="container" style="margin-top: 200px; height: 70vh ">
+    <h4 align="center">Chỉnh sửa thông tin cá nhân</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.UserId)
+
+    @Html.HiddenFor(model => model.UserPassword)
+
+    <div class="form-group file">
+
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.UserEmail, "Email", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group file">
+
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.UserCode, "Mã số sinh viên", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.EditorFor(model => model.UserCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.UserCode, "", new { @class = "text-danger" })
+        </div>
+
+
+    </div>
+    <div class="form-group file">
+
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.UserName, "Họ và tên", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="form-group file">
+
+        <div class="col-md-5">
+            @Html.LabelFor(model => model.UserPhone, "Số điện thoại", htmlAttributes: new { @class = "control-label col-md-5" })
+            @Html.EditorFor(model => model.UserPhone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UserPhone, "", new { @class = "text-danger" })
+        </div>
+
+
+    </div>
+    <div class="form-group file">
+        <div class="forgot-pass"><a href="@Url.Action("ForgotPassword","User")">Quên mật khẩu?</a></div>
+
+        </div>
+
+
+
+
+
+        <div class="form-group file">
+            <div class="center-block m-3">
+                <input type="submit" value="Lưu thông tin" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    }
+</div>

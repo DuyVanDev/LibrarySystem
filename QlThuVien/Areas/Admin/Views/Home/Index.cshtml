@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+  
+
+.card {
+	border-radius: 8px;
+	color: white;
+	padding: 50px;
+	position: relative;
+}
+    .cart-inner {
+        display : flex;
+        flex-wrap: wrap;
+        align-items : center;
+        justify-content : center;
+        gap : 50px;
+
+    }
+    .zmdi {
+        color: white;
+        font-size: 28px;
+        opacity: 0.3;
+        position: absolute;
+        right: 13px;
+        top: 13px;
+    }
+
+    .stat {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        font-size: 8px;
+        margin-top: 25px;
+        padding: 10px 10px 0;
+        text-transform: uppercase;
+    }
+
+    .title {
+        display: inline-block;
+        font-size: 24px;
+        padding: 10px 10px 0;
+        text-transform: uppercase;
+    }
+
+    .value {
+        font-size: 28px;
+        padding: 0 10px;
+    }
+
+    .card.blue {
+        background-color: #2298F1;
+    }
+
+    .card.green {
+        background-color: #66B92E;
+    }
+
+    .card.orange {
+        background-color: #DA932C;
+    }
+
+    .card.red {
+        background-color: #D65B4A;
+    }
+
+
+</style>
+
+<div class="card-list">
+    <div class="row cart-inner">
+        <div class="col-12 col-md-5 ">
+            <div class="card blue">
+                <div class="title">Số lượng người dùng</div>
+                <i class="zmdi zmdi-upload"></i>
+                <div class="value">@ViewBag.user</div>
+                <div class="stat"><b>13</b>% increase</div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 ">
+            <div class="card green">
+                <div class="title">Số lượng sách</div>
+                <i class="zmdi zmdi-upload"></i>
+                <div class="value">@ViewBag.book</div>
+                <div class="stat"><b>4</b>% increase</div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5 ">
+            <div class="card orange">
+                <div class="title">Số lượng đang yêu cầu</div>
+                <i class="zmdi zmdi-download"></i>
+                <div class="value">@ViewBag.request</div>
+                <div class="stat"><b>13</b>% decrease</div>
+            </div>
+        </div>
+        <div class="col-12 col-md-5">
+            <div class="card red">
+                <div class="title">Số lượng đang mượn sách</div>
+                <i class="zmdi zmdi-download"></i>
+                <div class="value">@ViewBag.borrow</div>
+                <div class="stat"><b>13</b>% decrease</div>
+            </div>
+        </div>
+    </div>
+</div>

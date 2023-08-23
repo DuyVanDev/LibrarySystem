@@ -1,0 +1,137 @@
+﻿
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="row align-items-center">
+        <img src="~/assets/images/resources-banner-1.jpg" alt="banner" />
+    </div>
+</div>
+
+
+
+<div style="background : #00000006; margin-bottom:100px;">
+    <section class="section-subpage section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-12">
+                    <!-- porlet -->
+
+
+                    <div class="blockSidebar" style="position : sticky; top : 100px">
+                        <h2 class="titleBlock event">
+                            Thông tin sách
+                        </h2>
+                        <div class="bodyBlock">
+                            <div>
+                                <ul class="nav-left" style="margin-top: 5px; margin-bottom: 5px;">
+                                    <li><a href="@Url.Action("Requested","UserTransactions")">Đang yêu cầu</a></li>
+                                    <li><a href="@Url.Action("Received","UserTransactions")">Sách đang mượn</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- end porlet -->
+
+                </div>
+                <!-- end: left -->
+
+                <div class="col-lg-9 col-md-9 col-12">
+
+                    @*<script src="App_Themes/jQuery/jquery.mousewheel.min.js" type="text/javascript"></script>*@
+
+
+                    <div class="blockHome">
+
+                        <div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-title">
+                                        <h2 class="wow fadeInUp titleBlock p-0">Danh sách tài liệu đang yêu cầu</h2>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-area">
+                                <!-- category top -->
+                                <div style="background: #d7f3ff; padding : 10px 20px;">
+                                    <div class="row align-items-center">
+
+                                        <div class="col-md-12">
+                                            <div class="left-wrapper">
+                                                @foreach (var item in Model)
+                                                {
+                                                    <div class="col-md-6 col-xs-6 border-primary mb-3" >
+                                                        <div class="card mb-3" style="max-width: 540px;">
+                                                            <div class="row g-0">
+                                                                <div class="col-md-12">
+                                                                    <div class="card-header text-white bg-info">
+                                                                        <p class="card-text">
+                                                                            <h5 class="card-title">
+                                                                                @item.BookTitle
+
+                                                                            </h5>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6 p-3">
+                                                                    <img src="~/UploadImage/@item.BookImage" width="100%" alt="@item.BookTitle">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="card-body">
+                                                                        <p class="card-text"><b>Danh mục: </b>@item.CategoryName</p>
+                                                                        <p class="card-text"><b>Ngày mượn: </b>@item.TranDate</p>
+                                                                        <p class="card-text"><b>Tác giả: </b>@item.BookAuthor</p>
+
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="card-footer ">
+                                                                        <div onclick="requestCancel()" class="btn btn-sm btn-danger" data-toggle='tooltip' title='Cancel request' style="margin-top:16px">
+                                                                            <i class="fas fa-minus-circle"></i>
+                                                                            @Html.ActionLink("Hủy yêu cầu", "DeleteRequest", new { tranId = item.TranId }, new { @class = "", style = "text-decoration:none; color: white" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                    <div id="request" style="margin:5%" class="text-center text-danger">@Session["requestMessage"]</div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<script>
+
+function requestCancel() {
+                alert("Book request canceled successfully")
+            }
+</script>

@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var kh = Session["TaikhoanKH"];
+}
+
+<style>
+    .single-product {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 30px;
+    }
+
+    .product-img {
+        /*flex: 1;*/
+        height: 200px;
+        width: 120px;
+        /*border: 1px solid #000;
+        border-radius: 4px;*/
+    }
+
+        .product-img img {
+            /*width: 100%;
+            height: 100%;
+            object-fit: cover;*/
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        }
+
+    .product-content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        flex: 2;
+    }
+
+    .download {
+        flex: 1;
+    }
+</style>
+
+<div class="breadcrumbs" style="padding:0px; background:none;">
+    <div class="container">
+        <div class="row align-items-center">
+            <img src="~/assets/images/resources-banner-1.jpg" alt="banner" />
+        </div>
+    </div>
+</div>
+
+
+
+
+<body>
+
+
+    <div class="row" style="position : relative ">
+        <div class="col-12 col-lg-9 order-lg-first" style="padding-right: 0px;">
+
+        </div>
+        <div class="col-12 col-lg-3 order-lg-last">
+
+        </div>
+    </div>
+    <!-- Start Pricing Table Area -->
+    <section class="section-subpage section" style="margin-bottom:200px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-12">
+                    <!-- porlet -->
+
+
+                    <div class="blockSidebar" style="position : sticky; top : 100px">
+                        <h2 class="titleBlock event">
+                            Nhóm tài liệu
+                        </h2>
+                        <div class="bodyBlock">
+                            <div>
+                                <ul class="nav-left" style="margin-top: 5px; margin-bottom: 5px;">
+                                    <li><a href="@Url.Action("Requested","UserTransactions")">Đang yêu cầu</a></li>
+                                    <li><a href="@Url.Action("Received","UserTransactions")">Sách đang mượn</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- end porlet -->
+
+                </div>
+                <!-- end: left -->
+
+                <div class="col-lg-9 col-md-9 col-12">
+
+
+
+                    <div id="" class="blockHome">
+
+                        <div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="section-title">
+                                        <h2 class="wow fadeInUp titleBlock p-0" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Danh sách tài liệu</h2>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="list-doc-page">
+                                <div>
+                                    <table class="lbGrid" cellspacing="0" cellpadding="0" userenderpaging="true" allowmulticolumnsorting="False" border="0" id="ctl00_phContent_grvPage" style="border-style:None;width:100%;border-collapse:collapse;border: none;">
+                                        <tbody>
+                                            <tr class="lbGridPager" align="right">
+                                                <td>
+                                                    <table border="0">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+
+
+
+                                                    <div class="row" style=" background: #d7f3ff;">
+
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <div class="col-lg-12">
+                                                                <div class="single-product list-view">
+                                                                    <div class="product-img">
+                                                                        <img border="0" class="bookname" alt="" src="~/UploadImage/@item.BookImage" style="width:100%;border-width:0px;max-width: 150px;">
+
+                                                                    </div>
+                                                                    <div class="product-content">
+                                                                        <div class="product-name">
+                                                                            <h3>@item.BookTitle</h3>
+                                                                        </div>
+                                                                        <div class="produt-author">
+                                                                            <label>Tác giả: @item.BookAuthor</label>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="download">
+                                                                        @*<button class="btn btn-success"><a style="color : white;padding : 4px 8px; text-decoration: none" href="@Url.Action("ReturnReceived", "UserTransactions",new { tranId = item.TranId })">TRẢ</a></button>*@
+                                                                        @if (item.TranStatus == "Accepted_Request")
+                                                                        {
+                                                                            <button class="btn btn-success btn-return" data-id="@item.TranId"><a style="color : white;padding : 4px 8px; text-decoration: none">Trả </a></button>
+
+
+
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <button class="btn btn-success btn-return" data-id="@item.TranId"><a style="color : white;padding : 4px 8px; text-decoration: none"> Đang trả</a></button>
+
+
+
+                                                                        }
+                                                                    </div>
+
+
+                                                                </div>
+                                                                @*@if (item.TranStatus == "Accepted_Request")
+                                                                {
+                                                                    <p data-return="@item.TranDate_Get" class="desc">Yêu cầu mượn sách của bạn đã được kiểm duyệt. Vui lòng lấy sách trước ngày @item.TranDate_Get </p>
+
+
+
+                                                                }
+                                                                else
+                                                                {
+
+                                                                    <p data-return="@item.TranDate_GiveBack" class="desc">Bạn đã yêu cầu trả sách. Vui lòng trả sách tại thư viện trước ngày @item.TranDate_GiveBack  </p>
+
+
+                                                                }*@
+
+                                                            </div>
+                                                        }
+                                                        <div id="receive" style="margin:5%" class="text-center text-danger">@Session["receiveMessage"]</div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--/ End Pricing Table Area -->
+    <!-- Start Footer Area -->
+    <!--/ End Footer Area -->
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover" style="display: none;">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+
+    <script>
+        $(document).ready(function () {
+            // Add down arrow icon for collapse element which is open by default
+            $(".collapse.show").each(function () {
+                $(this).prev(".card-header").find(".fa").addClass("fa-angle-down").removeClass("fa-angle-right");
+            });
+
+            // Toggle right and down arrow icon on show hide of collapse element
+            $(".collapse").on('show.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-right").addClass("fa-angle-down");
+            }).on('hide.bs.collapse', function () {
+                $(this).prev(".card-header").find(".fa").removeClass("fa-angle-down").addClass("fa-angle-right");
+            });
+        });
+    </script>
+    <!-- end accordion -->
+
+
+
+</body>
+
+@section scripts {
+
+
+
+    <script type="text/javascript">
+        $(".btn-return").on("click", function (e) {
+            e.preventDefault();
+            var id = parseInt($(this).data("id"));
+            /*var giveback = $(".desc").data("return");*/
+            const _that = $(this)[0];
+            $.ajax({
+                url: "/UserTransactions/ReturnReceived/",
+                data: { tranId: id },
+                dataType: 'json',
+                type: 'GET',
+                contentType: 'application/json;charset=utf-8',
+                success: function (response) {
+                    /*$(".desc")[0].innerHTML = "Bạn đã yêu cầu trả sách. Vui lòng trả sách tại thư viện trước ngày " + giveback;*/
+                    _that.innerHTML = "Đang trả";
+                    
+                }
+                
+            })
+            
+
+        }
+        )
+
+
+
+
+    </script>
+}

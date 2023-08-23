@@ -1,0 +1,187 @@
+﻿
+@model QlThuVien.Models.Book
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    <script src="~/Areas/Admin/Content/ckeditor/ckeditor.js"></script>
+}
+
+<div class="container">
+    <h4>Thêm sách mới    </h4>
+    @*Thêm thuộc tính cho form để upload ảnh*@
+    @using (Html.BeginForm("Create", "Products", FormMethod.Post, new
+    {
+        @enctype = "multipart/form-data"
+    }))
+    {
+        @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="control-label col-md-2">Tên sách:</label>
+        <div class="col-md-10">
+            <input type="text" size="70" name="sTenSach" class="form-control"
+                   required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Danh mục:</label>
+        <div class="col-md-10">
+            @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+            @Html.DropDownList("DanhMuc", null, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả:</label>
+        <div class="col-md-10">
+
+
+            <textarea name="sMoTa" id="Description"></textarea>
+            <script>
+                CKEDITOR.replace("Description");
+            </script>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Hình ảnh:</label>
+        <div class="col-md-10">
+            <input type="file" name="UploadImage" class="form-control" />
+            @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
+            @ViewBag.ThongBao
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">File:</label>
+        <div class="col-md-10">
+            <input type="file" name="UploadFile" class="form-control" />
+            @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
+            @ViewBag.ThongBao
+        </div>
+    </div>
+
+
+</div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Số lượng:</label>
+            <div class="col-md-10">
+                <input type="number" min="1" required name="mSoluong"
+                       value="1" class="form-control" />
+            </div>
+        </div>
+        
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2" style="min-width : 200px">Ngôn ngữ:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    @Html.DropDownList("Language", new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Tiếng Việt", Value = "Tiếng Việt" },
+        new SelectListItem{ Text="Tiếng Anh", Value = "Tiếng Anh" },
+               }, new { @class = "form-control" })
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Tác giả:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="Tacgia" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2">ISBN:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="isbn" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Bản quyền:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="copyright" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-2">Nguồn:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="source" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Ngày phát hành:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="date" size="70" name="date" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group d-flex align-center">
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Nhà xuất bản:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="nhaxuatban" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+
+            <div class="col-md-5">
+                <label class="control-label col-md-3">Vị trí:</label>
+                <div class="col-md-8">
+                    @*Hiển thị ViewBag.MaCD vào dropdownlist*@
+                    <input type="text" size="70" name="vitri" class="form-control"
+                           required />
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+                @Html.ActionLink("Về trang chủ", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
+            </div>
+
+        </div>
+
+    }
+
+</div>
+

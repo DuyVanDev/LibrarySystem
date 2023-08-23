@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "LoginLogoutPartial";
+    Layout = null;
+
+}
+<link rel="stylesheet" href="~/assets/css/font-awesome.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+@using QlThuVien.Models
+@{
+    User kh = (User)Session["TaiKhoan"];
+
+
+}
+<style>
+    .username {
+        color: #1C5599;
+        font-weight: 500;
+        cursor: pointer
+    }
+
+        .username:hover {
+            color: #000000;
+        }
+</style>
+
+@if (Session["TaiKhoan"] == null)
+
+{
+    <ul>
+        <li>
+
+            <a href="~/User/DangKy">
+                <i class="fa-solid fa-user"></i>
+                Đăng ký
+            </a>
+        </li>
+        <li>
+
+            <a href="~/User/DangNhap">
+                <i class="fa-sharp fa-solid fa-right-to-bracket"></i>
+                Đăng nhập
+            </a>
+        </li>
+    </ul>
+}
+else
+{
+    <ul>
+        <li>
+            <div class="dropdown">
+                
+                <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span class="fa fa-user"></span> <span class="username">Xin chào: @kh.UserName</span>
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="@Url.Action("ChangeInfo", "User")" >Đổi thông tin</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Requested", "UserTransactions")" target='_self'><span>Các yêu cầu</span></a></li>
+                </ul>
+            </div>
+           
+
+        </li>
+        <li>
+            <a href="@Url.Action("DangXuat","User")">
+                <span class="glyphicon glyphicon-log-out">
+                </span>
+                Đăng xuất
+            </a>
+        </li>
+    </ul>
+}
+
+
