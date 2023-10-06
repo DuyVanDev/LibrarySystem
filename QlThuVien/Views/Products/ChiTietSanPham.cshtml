@@ -15,7 +15,7 @@
 
                     </div>
                     <div>
-                        <iframe src="~/UploadFile/@Model.FileUpLoad" style="width : 100% ; " height="600" type='application/pdf'>
+                        <iframe src="@Model.FileUpLoad" style="width : 100% ; " height="600" type='application/pdf'>
                         </iframe>
                     </div>
                     
@@ -57,7 +57,7 @@
                                     @foreach (var item in ViewBag.data)
                                     {
                                         <li>
-                                            <img src="~/UploadImage/@item.BookImage" width="70px" height="100px" />
+                                            <img src="@item.BookImage" width="70px" height="100px" />
                                             <a href="">@item.BookTitle</a>
                                         </li>
                                     }

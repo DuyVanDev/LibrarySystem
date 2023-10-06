@@ -126,7 +126,7 @@
                                         <div class="single-product list-view">
                                             <div class="product-img" data-id="@item.BookId">
                                                 <a href="@Url.Action("ChiTietSanPham", "Products" , new { id = item.BookId})">
-                                                    <img border="0" class="bookname" alt="" src="~/UploadImage/@item.BookImage">
+                                                    <img border="0" class="bookname" alt="" src="@item.BookImage">
                                                 </a>
 
                                                 <span class="view d-flex align-items-center justify-content-center " style="gap:4px; margin-top:5px; font-weight:700; font-size:17px;"><i class="fa-regular fa-eye"></i><p title="Lượt xem">@item.ViewTotal</p></span>

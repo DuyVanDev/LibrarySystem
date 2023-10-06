@@ -1,8 +1,12 @@
-﻿using QlThuVien.Models;
+﻿using Firebase.Auth;
+using Firebase.Storage;
+using QlThuVien.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -13,6 +17,11 @@ namespace QlThuVien.Areas.Admin.Controllers
     {
         // GET: Admin/Products
         QLTVEntities db = new QLTVEntities();
+
+        private string ApiKey = "AIzaSyB6tJ05rcSivHNtsbSHv1w376QlyfSERuc";
+        private string Bucket = "librarysystem-387109.appspot.com";
+        private string AuthEmail = "vanduy@gmail.com";
+        private string AuthPassword = "vanduy";
         public ActionResult Index()
         {
             if (Session["Admin"] == null)
@@ -31,42 +40,59 @@ namespace QlThuVien.Areas.Admin.Controllers
 
             return View();
         }
+
         
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(Book book, FormCollection f, HttpPostedFileBase UploadImage, HttpPostedFileBase UploadFile)
+        public async Task<ActionResult> Create(Book book, FormCollection f, HttpPostedFileBase UploadImage, HttpPostedFileBase UploadFile)
         {
+            
             try
             {
-                if (UploadImage.ContentLength > 0 && UploadFile.ContentLength > 0)
+                var imageUrl = "";
+                var fileUrl = "";
+                if ( UploadFile.ContentLength > 0)
                 {
-                    string _FileImage = Path.GetFileName(UploadImage.FileName);
-                    string _pathImg = Path.Combine(Server.MapPath("~/UploadImage"), _FileImage);
-                    string _FileName = Path.GetFileName(UploadFile.FileName);
-                    string _pathName = Path.Combine(Server.MapPath("~/UploadFile"), _FileName);
-                    UploadImage.SaveAs(_pathImg);
-                    UploadFile.SaveAs(_pathName);
+                    
+                    var streamFile = UploadFile.InputStream;
+                    var fileNameFile = Path.GetFileName(UploadFile.FileName);
+                    var storageFile = new FirebaseStorage("librarysystem-387109.appspot.com");
+                    fileUrl = await storageFile.Child("files").Child(fileNameFile).PutAsync(streamFile);
+
                 }
+                if (UploadImage.ContentLength > 0)
+                {
+                    var streamImg = UploadImage.InputStream;
+                    var fileNameImg = Path.GetFileName(UploadImage.FileName);
+                    var storageImg = new FirebaseStorage("librarysystem-387109.appspot.com");
+                    imageUrl = await storageImg.Child("images").Child(fileNameImg).PutAsync(streamImg);
+
+
+                }
+
                 ViewBag.Message = "File Uploaded Successfully!!";
-                book.BookTitle = f["sTensach"];
-                book.Quantity = int.Parse(f["mSoluong"]);
-                book.Description = f["sMoTa"].Replace("<p>", "").Replace("</p>", "");
-                book.BookAuthor = f["Tacgia"];
-                book.ISBN = f["isbn"];
-                book.Publisher = f["nhaxuatban"];
-                book.Source = f["source"];
-                book.Date = f["date"];
-                book.BookPosition = f["vitri"];
-                book.CopyRights = f["copyright"];
-                book.BookImage = UploadImage.FileName.Replace(" ", "%20");
-                book.FileUpLoad = UploadFile.FileName.Replace(" ", "%20");
+                    book.BookTitle = f["sTensach"];
+                    book.Quantity = int.Parse(f["mSoluong"]);
+                    book.Description = f["sMoTa"].Replace("<p>", "").Replace("</p>", "");
+                    book.BookAuthor = f["Tacgia"];
+                    book.ISBN = f["isbn"];
+                    book.Publisher = f["nhaxuatban"];
+                    book.Source = f["source"];
+                    book.Date = f["date"];
+                    book.BookPosition = f["vitri"];
+                    book.CopyRights = f["copyright"];
+                    book.BookImage = imageUrl;
+                    book.FileUpLoad = fileUrl;
+                    //book.BookImage = UploadImage.FileName.Replace(" ", "%20");
+                    //book.FileUpLoad = UploadFile.FileName.Replace(" ", "%20");
 
-                book.CategoryId = int.Parse(f["DanhMuc"]);
-                book.Language = f["Language"];
+                    book.CategoryId = int.Parse(f["DanhMuc"]);
+                    book.Language = f["Language"];
 
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    db.Books.Add(book);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                //}
             }
             catch
             {
@@ -75,6 +101,31 @@ namespace QlThuVien.Areas.Admin.Controllers
 
                 return View();
 
+        }
+
+        public async void Upload (FileStream stream, string fileName)
+        {
+           
+            var auth = new FirebaseAuthProvider(new Firebase.Auth.FirebaseConfig(ApiKey));
+            var a = await auth.SignInWithEmailAndPasswordAsync(AuthEmail, AuthPassword);
+            var cancellation = new CancellationTokenSource();
+            var task = new FirebaseStorage(
+                Bucket,
+                new FirebaseStorageOptions
+                {
+                    AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
+                    ThrowOnCancel = true
+                }
+                )
+            .Child("uploads")
+            .Child(fileName)
+            .PutAsync(stream,cancellation.Token);
+            try
+            {
+                string link = await task;
+            }catch(Exception ex) {
+                Console.WriteLine(ex.ToString());
+            }
         }
         //Edit
         public ActionResult Edit(int id)
